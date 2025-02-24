@@ -1,9 +1,9 @@
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Agenda } from "../components/Agenda.jsx";
-import ContactList from "../components/ContactList.jsx";
+import contactList from "../components/contactList.jsx";
 import React, { useContext } from 'react';
 import { UserContext } from "../components/UserContext.jsx";
-import ContactGenerator from "../components/ContactGenerator.jsx";
+import contactGenerator from "../components/contactGenerator.jsx";
 
 export const Agendas = () => {
 
@@ -11,6 +11,6 @@ export const Agendas = () => {
   const user = useContext(UserContext);
 
 	return (
-		<Agenda leftContent={<ContactGenerator/>} rightContent={<ContactList/>}/>
+		<Agenda leftContent={<contactGenerator/>} rightContent={<contactList/>}/>
 	);
 }; 
