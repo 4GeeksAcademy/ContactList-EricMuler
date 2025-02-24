@@ -1,35 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useContext } from 'react';
-import { UserContext } from "../components/UserContext.jsx";
-import { ContactListContext } from '../components/UserContext.jsx';
+import { UserContext } from "./UserContext.jsx";
+import { contactListContext } from './UserContext.jsx';
 
-function ContactList() {
+function contactList() {
 
-    const [contacts, setContacts] = useContext(ContactListContext)
+    const [contacts, setcontacts] = useContext(contactListContext)
     const [editedValue, setEditedValue] = useState('')
     const [editing, setEditing] = useState({ id: null, field: '' })
     const [user, setUser] = useContext(UserContext);
 
-    const getContactList = async() => {
+    const getcontactList = async() => {
       if (!user) return; 
       const response = await fetch(`https://playground.4geeks.com/contact/agendas/${user}`);
       const data = await response.json();
-      setContacts(data.contacts);
+      setcontacts(data.contacts);
     }
 
     useEffect(() => {   
-      getContactList(user, setContacts);
+      getcontactList(user, setcontacts);
     }, [user])
     
-    const deleteContact = async (id) => { 
+    const deletecontact = async (id) => { 
       const response = await fetch(`https://playground.4geeks.com/contact/agendas/${user}/contacts/${id}`, {
         method: 'DELETE',
       })
-      getContactList();
+      getcontactList();
     }
 
-    const editContact = async (id, field) => { 
+    const editcontact = async (id, field) => { 
       await fetch(`https://playground.4geeks.com/contact/agendas/${user}/contacts/${id}`, {
         method: 'PUT',
         body: JSON.stringify({ [field]: editedValue }), 
@@ -37,7 +37,7 @@ function ContactList() {
           'Content-Type': 'application/json',
         },
       })
-      getContactList() 
+      getcontactList() 
       setEditing({ id: null, field: '' }); 
     }
 
@@ -58,7 +58,7 @@ function ContactList() {
                     type="text"
                     value={editedValue} 
                     onChange={(e) => setEditedValue(e.target.value)}
-                    onKeyDown={(e) => {if (e.key === 'Enter') {editContact(contact.id, 'name')}}} 
+                    onKeyDown={(e) => {if (e.key === 'Enter') {editcontact(contact.id, 'name')}}} 
                     onBlur={() => setEditing({ id: null, field: '' })} 
                   />
                 ) : (
@@ -76,7 +76,7 @@ function ContactList() {
                   type="text"
                   value={editedValue} 
                   onChange={(e) => setEditedValue(e.target.value)} 
-                  onKeyDown={(e) => {if (e.key === 'Enter') {editContact(contact.id, 'phone')}}} 
+                  onKeyDown={(e) => {if (e.key === 'Enter') {editcontact(contact.id, 'phone')}}} 
                   onBlur={() => setEditing({ id: null, field: '' })}
                   />
                 ) : (
@@ -94,7 +94,7 @@ function ContactList() {
                   type="text"
                   value={editedValue} 
                   onChange={(e) => setEditedValue(e.target.value)} 
-                  onKeyDown={(e) => {if (e.key === 'Enter') {editContact(contact.id, 'email')}}} 
+                  onKeyDown={(e) => {if (e.key === 'Enter') {editcontact(contact.id, 'email')}}} 
                   onBlur={() => setEditing({ id: null, field: '' })} 
                   />
                 ) : (
@@ -112,7 +112,7 @@ function ContactList() {
                   type="text"
                   value={editedValue} 
                   onChange={(e) => setEditedValue(e.target.value)} 
-                  onKeyDown={(e) => {if (e.key === 'Enter') {editContact(contact.id, 'address')}}} 
+                  onKeyDown={(e) => {if (e.key === 'Enter') {editcontact(contact.id, 'address')}}} 
                   onBlur={() => setEditing({ id: null, field: '' })} 
                   />
                 ) : (
@@ -124,7 +124,7 @@ function ContactList() {
                 <button className="btn btn-sm ms-0" id="pencil"><i className="bi bi-pencil"></i></button>
               </div>
             </div>
-            <button type="button" className="btn btn-danger" onClick={() => deleteContact(contact.id)}>
+            <button type="button" className="btn btn-danger" onClick={() => deletecontact(contact.id)}>
               <i className="bi bi-trash"></i>
             </button>
           </li>
@@ -135,4 +135,4 @@ function ContactList() {
   )
 }
 
-export default ContactList
+export default contactList

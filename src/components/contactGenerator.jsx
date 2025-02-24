@@ -1,5 +1,5 @@
 import { React, useContext, useState } from 'react';
-import { ContactListContext, UserContext } from "../components/UserContext.jsx";
+import { ContactListContext, UserContext } from "./UserContext.jsx";
 import {getContactList } from "./ContactList.jsx";
 
 function ContactGenerator() {

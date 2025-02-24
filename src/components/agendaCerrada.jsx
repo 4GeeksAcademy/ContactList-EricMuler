@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from './UserContext'
 
-function AgendaCerrada() {
+function agendaCerrada() {
 
     const [user, setUser] = useContext(UserContext);
     const [userList, setUserList] = useState([])
@@ -75,4 +75,4 @@ function AgendaCerrada() {
       );
     }
 
-export default AgendaCerrada
+export default agendaCerrada
